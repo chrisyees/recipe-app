@@ -68,7 +68,7 @@ public class RecipeController {
 	 * Deletes recipe based on id
 	 */
 	@DeleteMapping(path="/delete/{id}")
-	public void deleteUser(@PathVariable Long id) {
+	public void deleteRecipe(@PathVariable Long id) {
 		recipeRepository.deleteById(id);
 	}
 	
