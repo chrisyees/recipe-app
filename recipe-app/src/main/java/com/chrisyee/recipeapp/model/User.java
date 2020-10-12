@@ -1,9 +1,11 @@
 package com.chrisyee.recipeapp.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /*
  * Model for User Accounts
@@ -11,35 +13,47 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name= "user")
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	Long user_id; //variables must be same name as column, or use @Column annotation
+	@Column(name="user_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 	
-	String user_username;
+	@Column(name="user_username")
+	private String username;
 	
-	String user_password;
+	@Column(name="user_password")
+	private String password;
 
-	public String getUser_username() {
-		return user_username;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUser_username(String user_username) {
-		this.user_username = user_username;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getUser_password() {
-		return user_password;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUser_password(String user_password) {
-		this.user_password = user_password;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + user_id + ", user_username=" + user_username + ", user_password=" + user_password + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
 	
 }

@@ -3,7 +3,11 @@ package com.chrisyee.recipeapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chrisyee.recipeapp.model.User;
@@ -25,6 +29,7 @@ public class UserController {
 	//Get user information based on id
 	@GetMapping(path="/id/{id}")
 	public User getUser(@PathVariable(value = "id") Long id) {
+		System.out.println(userRepository.findById(id).orElse(null));
 		return userRepository.findById(id).orElse(null);
 	}
 	
@@ -36,6 +41,16 @@ public class UserController {
 		} catch(Exception e) {
 			return null;
 		}
+	}
+	
+	@PostMapping(path="/add")
+	public User addUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	
+	@PutMapping(path="/change/{id}")
+	public User changeUser(@RequestBody User user) {
+		
 	}
 		
 }
