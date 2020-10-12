@@ -2,12 +2,14 @@ package com.chrisyee.recipeapp.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -34,6 +36,9 @@ public class Recipe {
 
 	@ManyToMany(mappedBy = "recipes")
 	private Set<User> users;
+	
+	@OneToMany(mappedBy="ingredient", cascade = CascadeType.REMOVE)
+	private Set<Ingredient> ingredients;
 	
 	public Set<User> getUsers() {
 		return users;
