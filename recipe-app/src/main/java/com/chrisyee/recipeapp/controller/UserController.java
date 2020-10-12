@@ -67,6 +67,9 @@ public class UserController {
 		return userRepository.save(changedUser);
 	}
 	
+	/*
+	 * Deletes user based on id
+	 */
 	@DeleteMapping(path="/delete/{id}")
 	public void deleteUser(@PathVariable Long id) {
 		userRepository.deleteById(id);
