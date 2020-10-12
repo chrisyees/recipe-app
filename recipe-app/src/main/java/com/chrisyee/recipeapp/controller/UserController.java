@@ -1,6 +1,7 @@
 package com.chrisyee.recipeapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,14 +27,18 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	//Get user information based on id
+	/*
+	 * Get user information based on id in URL
+	 */
 	@GetMapping(path="/id/{id}")
 	public User getUser(@PathVariable(value = "id") Long id) {
 		System.out.println(userRepository.findById(id).orElse(null));
 		return userRepository.findById(id).orElse(null);
 	}
 	
-	//Get user information based on username
+	/*
+	 * Get user information based on username in URL
+	 */
 	@GetMapping(path="/username/{username}")
 	public User findUserByUsername(@PathVariable(value = "username") String username) {
 		try{
@@ -43,14 +48,28 @@ public class UserController {
 		}
 	}
 	
+	/*
+	 * Adds new user with request data
+	 */
 	@PostMapping(path="/add")
 	public User addUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
 	
+	/*
+	 * Changes user log-in info based on id with request data
+	 */
 	@PutMapping(path="/change/{id}")
-	public User changeUser(@RequestBody User user) {
-		
+	public User changeUser(@RequestBody User oldUser, @PathVariable Long id) {
+		User changedUser = userRepository.findById(id).orElse(null);
+		changedUser.setUsername(oldUser.getUsername());
+		changedUser.setPassword(oldUser.getPassword());
+		return userRepository.save(changedUser);
+	}
+	
+	@DeleteMapping(path="/delete/{id}")
+	public void deleteUser(@PathVariable Long id) {
+		userRepository.deleteById(id);
 	}
 		
 }
