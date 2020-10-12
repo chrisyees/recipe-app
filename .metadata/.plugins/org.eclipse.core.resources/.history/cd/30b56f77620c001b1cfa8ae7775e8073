@@ -1,0 +1,7 @@
+package com.chrisyee.recipeapp.repository;
+
+import org.springframework.data.jpa.repository.JpaRpository;
+
+public class UserRepository extends JpaRepository<>{
+
+}

@@ -1,0 +1,45 @@
+package com.chrisyee.recipeapp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.chrisyee.recipeapp.model.User;
+import com.chrisyee.recipeapp.repository.UserRepository;
+
+@RestController
+@RequestMapping(path="/user") //URL must be /user to access
+public class UserController {
+
+	//inject an instance of the repo here
+	@Autowired
+	private UserRepository userRepository;
+	
+	//Get user information based on id
+	@GetMapping(path="/id/{id}")
+	public User getUser(@PathVariable(value = "id") Long id) {
+		System.out.println("getting User by id");
+		User u = userRepository.findById(id).orElse(null);
+		System.out.println(u);
+		return u;
+		//return userRepository.findById(id).orElse(null);
+	}
+	
+	//Get user information based on username
+	@GetMapping(path="/username/{username}")
+	public User findUserByUsername(@PathVariable(value = "username") String username) {
+		try{
+			System.out.println("getting User by username");
+			User u = userRepository.findUserByUsername(username);
+			System.out.println(u);
+			return u;
+			//return userRepository.findUserByUsername(username); //uses query in repo
+		} catch(Exception e) {
+			return null;
+		}
+	}
+		
+}

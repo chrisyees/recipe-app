@@ -1,0 +1,32 @@
+package com.chrisyee.recipeapp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.chrisyee.recipeapp.model.User;
+import com.chrisyee.recipeapp.repository.UserRepository;
+
+@Controller
+@RequestMapping(path="/user") //URL must be /user to access
+public class UserController {
+
+	//inject an instance of the repo here
+	@Autowired
+	private UserRepository userRepository;
+	
+	//Get user information based on id
+	@GetMapping(path="/{id}")
+	public User getUser(@PathVariable(value = "id") Long id) {
+		return userRepository.findById(id).orElse(null);
+	}
+	
+	//Get user information based on username
+	@GetMapping(path="/{username}")
+	public User getUserByUsername(@PathVariable(value = "username") String username) {
+		return userRepository.findBy(username).orElse(null);
+	}
+		
+}
