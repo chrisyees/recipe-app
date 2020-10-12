@@ -50,6 +50,9 @@ public class UserController {
 		}
 	}
 	
+	/*
+	 * Find recipes that the user has selected for their cookbook
+	 */
 	@GetMapping(path="/cookbook/{id}")
 	public List<String> findUserRecipes(@PathVariable(value = "id") Long id) {
 		try{
@@ -66,6 +69,11 @@ public class UserController {
 	@PostMapping(path="/add")
 	public User addUser(@RequestBody User user) {
 		return userRepository.save(user);
+	}
+	
+	@PostMapping(path="/cookbook/add/{user_id}/{recipe_id}")
+	public void addUserRecipe(@PathVariable(value = "user_id") Long user_id, @PathVariable(value = "recipe_id") Long recipe_id) {
+		userRepository.addUserRecipe(user_id, recipe_id);
 	}
 	
 	/*

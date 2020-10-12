@@ -1,10 +1,17 @@
 package com.chrisyee.recipeapp.model;
 
+import java.util.ArrayList;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /*
@@ -26,6 +33,20 @@ public class User {
 	
 	@Column(name="user_password")
 	private String password;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_has_recipe",
+				joinColumns = @JoinColumn(name = "user_id"),
+				inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+	private Set<Recipe> recipes;
+	
+	public Set<Recipe> getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(Set<Recipe> recipes) {
+		this.recipes = recipes;
+	}
 
 	public Long getId() {
 		return id;

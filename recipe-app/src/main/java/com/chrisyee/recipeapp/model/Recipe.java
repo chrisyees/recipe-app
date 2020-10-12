@@ -1,10 +1,13 @@
 package com.chrisyee.recipeapp.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -28,6 +31,17 @@ public class Recipe {
 	
 	@Column(name = "recipe_time_measurement")
 	private String time_measurement;
+
+	@ManyToMany(mappedBy = "recipes")
+	private Set<User> users;
+	
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
 	public Long getId() {
 		return id;
