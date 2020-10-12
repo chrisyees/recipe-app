@@ -71,6 +71,9 @@ public class UserController {
 		return userRepository.save(user);
 	}
 	
+	/*
+	 * Add Recipe to User Cookbook based on user id and recipe id
+	 */
 	@PostMapping(path="/cookbook/add/{user_id}/{recipe_id}")
 	public void addUserRecipe(@PathVariable(value = "user_id") Long user_id, @PathVariable(value = "recipe_id") Long recipe_id) {
 		userRepository.addUserRecipe(user_id, recipe_id);
