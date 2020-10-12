@@ -1,7 +1,0 @@
-package com.chrisyee.recipeapp.repository;
-
-import org.springframework.data.repository.CrusRepository;
-
-public class UserRepository extends JpaRepository<>{
-
-}

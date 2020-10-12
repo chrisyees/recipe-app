@@ -1,7 +1,0 @@
-package com.chrisyee.recipeapp.repository;
-
-import org.springframework.data.repository.CrudRepository;
-
-public class UserRepository extends CrudRepository<User, int>{
-
-}
