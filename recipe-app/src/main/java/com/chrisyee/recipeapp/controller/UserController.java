@@ -1,5 +1,7 @@
 package com.chrisyee.recipeapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chrisyee.recipeapp.model.User;
 import com.chrisyee.recipeapp.repository.UserRepository;
+
+import com.chrisyee.recipeapp.model.Recipe;
 
 /*combination of @Controller and @ResponseBody
 * @Controller  : implementation classes are auto-detected from scanning
@@ -31,7 +35,6 @@ public class UserController {
 	 */
 	@GetMapping(path="/id/{id}")
 	public User getUser(@PathVariable(value = "id") Long id) {
-		System.out.println(userRepository.findById(id).orElse(null));
 		return userRepository.findById(id).orElse(null);
 	}
 	
@@ -43,6 +46,16 @@ public class UserController {
 		try{
 			return userRepository.findUserByUsername(username); //uses query in repo
 		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	@GetMapping(path="/cookbook/{id}")
+	public List<String> findUserRecipes(@PathVariable(value = "id") Long id) {
+		try{
+			return userRepository.findUserRecipes(id); //uses query in repo
+		} catch(Exception e) {
+			System.out.println(e);
 			return null;
 		}
 	}
