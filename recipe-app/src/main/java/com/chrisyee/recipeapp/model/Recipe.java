@@ -1,5 +1,6 @@
 package com.chrisyee.recipeapp.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -37,8 +38,8 @@ public class Recipe {
 	@ManyToMany(mappedBy = "recipes")
 	private Set<User> users;
 	
-	@OneToMany(mappedBy="ingredient", cascade = CascadeType.REMOVE)
-	private Set<Ingredient> ingredients;
+	@OneToMany(mappedBy="recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Ingredient> ingredients = new HashSet<>();
 	
 	public Set<User> getUsers() {
 		return users;

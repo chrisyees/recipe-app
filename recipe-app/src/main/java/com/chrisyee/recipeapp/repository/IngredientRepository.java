@@ -16,7 +16,7 @@ import com.chrisyee.recipeapp.model.Recipe;
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient,Long>{
 
-	@Query(value="SELECT ingredients.ingredient_name FROM ingredients WHERE ingredients.recipe_id = :id", nativeQuery=true)
+	@Query(value="SELECT * FROM ingredients WHERE ingredients.recipe_id = :id", nativeQuery=true)
 	List<Ingredient> findIngredientsForRecipe(@Param("id") Long id);
 	
 	@Modifying

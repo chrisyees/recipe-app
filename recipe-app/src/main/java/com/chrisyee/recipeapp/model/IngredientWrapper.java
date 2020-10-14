@@ -4,13 +4,13 @@ import java.util.List;
 
 public class IngredientWrapper {
 
-	private List<String> ingredients;
+	private List<Ingredient> ingredients;
 
-	public List<String> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(List<String> ingredients) {
+	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 	

@@ -2,6 +2,7 @@ package com.chrisyee.recipeapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,15 +16,15 @@ public class Ingredient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ingredient_id")
+	@Column(name = "ingredient_id")
 	private Long id;
 	
 	@Column(name = "ingredient_name")
 	private String name;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="recipe_id", nullable=false)
-	private Long recipe_id;
+	private Recipe recipe;
 
 	public Long getId() {
 		return id;
@@ -41,11 +42,13 @@ public class Ingredient {
 		this.name = name;
 	}
 
-	public Long getRecipeId() {
-		return recipe_id;
+	public Recipe getRecipe() {
+		return recipe;
 	}
 
-	public void setRecipeId(Long recipeId) {
-		this.recipe_id = recipeId;
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
 	}
+
+
 }
